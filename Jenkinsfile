@@ -4,11 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                pre {
-                    always {
-                    echo "Running Pre build steps"
-                    }
-                }
                 echo "Building..."
             }
         }
