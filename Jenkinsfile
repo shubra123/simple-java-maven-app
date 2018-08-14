@@ -33,7 +33,7 @@ pipeline {
             }
             post {
                 always {
-                    echo "Running post UAT test: GIT taggging"
+                    echo "Running post UAT test: GIT taggging.. Done"
                 }
             }
         }
