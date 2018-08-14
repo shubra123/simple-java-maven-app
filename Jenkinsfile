@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building..."
+                echo "Building...Going to call script"
+                sh /apps/users/jenkins/test.sh
+                echo "After script ..."
             }
         }
         stage('DEV') {
