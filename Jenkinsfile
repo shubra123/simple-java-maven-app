@@ -1,25 +1,42 @@
 pipeline {
     agent any
-    
+
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'mvn clean install -Dmaven.test.skip=true -Dfindbugs.skip=true' 
+                echo "Building...Going to call script"
+                sh '/apps/users/jenkins/test.sh'
+                echo "After script ..."
             }
         }
-        stage('Test') {
+        stage('DEV') {
             steps {
-                sh 'mvn test'
+                echo "DEV Testing"
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    echo "Running post DEV test: GIT taggging"
                 }
             }
         }
-         stage('Deliver') {
+         stage('SIT') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                echo "SIT Testing"
+            }
+            post {
+                always {
+                    echo "Running post SIT test: GIT taggging"
+                }
+            }
+        }
+        stage('UAT') {
+            steps {
+                echo "UAT Testing"
+            }
+            post {
+                always {
+                    echo "Running post UAT test: GIT taggging.. Done"
+                }
             }
         }
     }
